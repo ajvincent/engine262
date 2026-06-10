@@ -20,7 +20,7 @@ import {
 export interface SetObject extends OrdinaryObject {
   readonly SetData: (Value | undefined)[];
 }
-export function isSetObject(value: Value): value is SetObject {
+export function isSetObject(value: object): value is SetObject {
   return 'SetData' in value;
 }
 /** https://tc39.es/ecma262/#sec-set-iterable */

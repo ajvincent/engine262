@@ -66,7 +66,7 @@ export function* AddEntriesFromIterable(target: ObjectValue, iterable: Value, ad
 export interface MapObject extends OrdinaryObject {
   readonly MapData: { Key: Value | undefined, Value: Value | undefined }[];
 }
-export function isMapObject(value: Value): value is MapObject {
+export function isMapObject(value: object): value is MapObject {
   return 'MapData' in value;
 }
 /** https://tc39.es/ecma262/#sec-map-iterable */

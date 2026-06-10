@@ -47,6 +47,8 @@ import {
   skipDebugger,
   CreateBytesModule,
   ValueOfNormalCompletion,
+  isMapObject,
+  isSetObject,
 } from '#self';
 import {
   Realm,
@@ -111,6 +113,17 @@ export function gc() {
       markCb(O.Prototype);
     } else if ('mark' in O) {
       (O as Markable).mark(markCb);
+
+      if (isMapObject(O)) {
+        for (const { Key, Value } of O.MapData) {
+          markCb(Key);
+          markCb(Value);
+        }
+      } else if (isSetObject(O)) {
+        for (const value of O.SetData) {
+          markCb(value);
+        }
+      }
     }
   };
 
