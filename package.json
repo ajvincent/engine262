@@ -53,12 +53,13 @@
     "prebuild:err": "node scripts/generate_error_message_hint.mts",
     "prebuild:bundle_test262_harness": "node scripts/bundle_test262_harness.mts",
     "watch": "run-p \"watch:*\"",
-    "build": "run-s prebuild:bundle_test262_harness prebuild:err \"build:*\"",
+    "build": "run-s prebuild:bundle_test262_harness prebuild:err build:regex_data build:dts build:engine",
     "build:regex_data": "node scripts/gen_regex_sets.mts",
     "build:dts": "tsgo -b .",
     "watch:dts": "tsgo -b . -w",
     "build:engine": "rollup -c ./scripts/rollup.config.mts",
     "watch:engine": "npm run build:engine -- --watch",
+    "spec:update": "node scripts/update_spec.mts",
     "test": "run-s -c test:inspector test:owned test:json test:test262",
     "test:test262": "node test/test262/test262.mts",
     "test:owned": "vitest test/engine262 --watch=false",
@@ -99,15 +100,14 @@
     }
   },
   "devDependencies": {
-    "@babel/code-frame": "^7.29.0",
-    "@babel/core": "^7.29.0",
-    "@babel/plugin-proposal-decorators": "^7.29.0",
-    "@babel/plugin-transform-explicit-resource-management": "^7.28.6",
-    "@babel/preset-env": "^7.29.2",
-    "@babel/preset-typescript": "^7.28.5",
+    "@babel/code-frame": "^8.0.0",
+    "@babel/core": "^8.0.0",
+    "@babel/plugin-proposal-decorators": "^8.0.0",
+    "@babel/plugin-transform-explicit-resource-management": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
+    "@babel/preset-typescript": "^8.0.0",
     "@engine262/eslint-plugin": "file:test/eslint-plugin-engine262",
     "@pppp606/ink-chart": "^0.2.4",
-    "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -143,6 +143,7 @@
     "tinyglobby": "^0.2.15",
     "typescript": "^5.9.3",
     "vitest": "^4.1.2",
-    "ws": "^8.20.0"
+    "ws": "^8.20.0",
+    "zod": "^4.4.3"
   }
 }
